@@ -7,7 +7,8 @@ on:
     branches: [ main ]
     paths:
       - '**.ps1'
-    
+  workflow_dispatch:
+
 jobs:
   build:
     name: analyze
