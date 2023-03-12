@@ -21,7 +21,7 @@ Describe -Tag "Detect" -Name "<Script.Name> runs OK" -ForEach $TestCases {
 
     Context "Script should run without issue" {
         It "Should not throw" {
-            { $ $Script.FullName } | Should -Not -Throw
+            { & $Script.FullName } | Should -Not -Throw
         }
     }
 }
