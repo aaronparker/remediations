@@ -7,7 +7,6 @@
         Twitter: @stealthpuppy
 #>
 
-
 #region Functions
 function Get-LoggedInUserProfile {
     $ComputerSystem = Get-CimInstance -Class "Win32_ComputerSystem"
@@ -28,6 +27,7 @@ function Get-LoggedInUserProfile {
 }
 
 function Set-MicrosoftTeamsFirewallRule {
+    [CmdletBinding(SupportsShouldProcess=$false)]
     param (
         [Parameter(Mandatory = $True)]
         [System.String] $Path
@@ -35,7 +35,7 @@ function Set-MicrosoftTeamsFirewallRule {
     $TeamsPath = Join-Path -Path $Path -ChildPath "AppData\Local\Microsoft\Teams\Current\Teams.exe"
     if (Test-Path -Path $TeamsPath) {
         if (Get-NetFirewallApplicationFilter -Program $TeamsPath -ErrorAction "SilentlyContinue") {
-        } 
+        }
         else {
             try {
                 $Rule = "Microsoft Teams: $TeamsPath"
@@ -53,10 +53,10 @@ function Set-MicrosoftTeamsFirewallRule {
                 throw $_.Exception.Message
             }
         }
-    } 
+    }
     else {
         throw "Cannot find path: $TeamsPath"
-    }     
+    }
 }
 #endregion Functions
 
@@ -66,11 +66,11 @@ try {
     foreach ($Item in $Profiles) {
         Set-MicrosoftTeamsFirewallRule -Path $Item
     }
-} 
+}
 catch [Exception] {
     Write-Output -InputObject $_.Exception.Message
     exit 1
-} 
+}
 finally {
     Write-Output -InputObject "Firewall rules created for Microsoft Teams."
     exit 0
