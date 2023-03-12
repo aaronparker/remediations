@@ -1,0 +1,91 @@
+name: "Validate proactive remediations"
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "**.ps1"
+
+jobs:
+  pester:
+    name: "Test scripts with Pester"
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Pester tests
+        shell: powershell
+        working-directory: "${{ github.workspace }}"
+        run: |
+          .\tests\Install-Pester.ps1
+          Import-Module -Name "Pester" -Force -ErrorAction "Stop"
+
+          $Config = [PesterConfiguration]::Default
+          $Config.Run.Path = "$env:GITHUB_WORKSPACE\tests"
+          $Config.Run.PassThru = $true
+          $Config.CodeCoverage.Enabled = $true
+          $Config.CodeCoverage.Path = "$env:GITHUB_WORKSPACE"
+          $Config.CodeCoverage.OutputFormat = "JaCoCo"
+          $Config.CodeCoverage.OutputPath = "$env:GITHUB_WORKSPACE\CodeCoverage.xml"
+          $Config.Output.Verbosity = "Detailed"
+          $Config.TestResult.Enabled = $true
+          $Config.TestResult.OutputFormat = "NUnitXml"
+          $Config.TestResult.OutputPath = "$env:GITHUB_WORKSPACE\tests\TestResults.xml"
+          Invoke-Pester -Configuration $Config
+
+      # Upload test results
+      - name: Upload Pester test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results
+          path: "${{ github.workspace }}\\tests\\TestResults.xml"
+
+      - name: Upload code coverage results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: codecov-results
+          path: "${{ github.workspace }}\\CodeCoverage.xml"
+
+  publish-test-results:
+    name: "Publish Tests Results"
+    needs: [ "pester"]
+    runs-on: ubuntu-latest
+    if: always()
+    permissions:
+      checks: write
+
+      # only needed unless run with comment_mode: off
+      pull-requests: write
+
+    steps:
+      - name: Download Pester Test Result Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: test-results
+          path: test-results
+
+      - name: Publish Pester Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          nunit_files: "test-results/**/*.xml"
+
+      - name: Download Code Coverage Result Artifacts
+        uses: actions/download-artifact@v3
+        if: always()
+        with:
+          name: codecov-results
+          path: codecov-results
+
+      - name: Upload to Codecov
+        id: codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: "codecov-results/**/*.xml"
+          verbose: true
