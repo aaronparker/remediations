@@ -9,7 +9,7 @@ param ()
 
 BeforeDiscovery {
     # TestCases are splatted to the script so we need hashtables
-    $Scripts = Get-ChildItem -Path "$env:GITHUB_WORKSPACE" -Recurse -Include "Detect*.ps1"
+    $Scripts = Get-ChildItem -Path "$env:GITHUB_WORKSPACE" -Recurse -Include "Detect*.ps1" -Exclude "*.Tests.ps1*"
 }
 
 Describe -Tag "Detect" -Name "<Script.Name> runs OK" -ForEach $Scripts {
