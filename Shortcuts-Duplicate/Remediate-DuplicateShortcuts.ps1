@@ -23,7 +23,7 @@
 param ()
 
 #region Functions
-Function Get-KnownFolderPath {
+function Get-KnownFolderPath {
     <#
         .SYNOPSIS
             Gets a known folder's path using GetFolderPath.
@@ -76,23 +76,27 @@ Write-Host "Removed shortcuts:`n$Output"
     Source:
     https://msendpointmgr.com/2020/06/25/endpoint-analytics-proactive-remediations/
 #>
-function Show-ToastNotification() {
-    $Load = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
-    $Load = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+function Show-ToastNotification {
+    param (
+        [System.Xml.XmlDocument] $Toast
+    )
+
+    [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+    [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 
     # Load the notification into the required format
     $ToastXML = New-Object -TypeName "Windows.Data.Xml.Dom.XmlDocument"
     $ToastXML.LoadXml($Toast.OuterXml)
 
-    # Display the toast notification
     try {
+        # Display the toast notification
         [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($App).Show($ToastXml)
     }
     catch {
-        Write-Error -Message 'Something went wrong when displaying the toast notification' -Level Warn
-        Write-Error -Message 'Make sure the script is running as the logged on user' -Level Warn
+        Write-Warning -Message "Something went wrong when displaying the toast notification. Ensure the script is running as the logged on user."
     }
 }
+
 <# Setting image variables
 $LogoImageUri = "https://azurefilesnorway.blob.core.windows.net/brandingpictures/Notifications/SCConfigMgr_Symbol_512.png"
 $HeroImageUri = "https://azurefilesnorway.blob.core.windows.net/brandingpictures/Notifications/MSEndpoingMgrHeroImage.png"
@@ -104,25 +108,10 @@ Invoke-WebRequest -Uri $LogoImageUri -OutFile $LogoImage
 Invoke-WebRequest -Uri $HeroImageUri -OutFile $HeroImage
 #>
 
-#Defining the Toast notification settings
-#ToastNotification Settings
-$Scenario = 'reminder' # <!-- Possible values are: reminder | short | long -->
-
-# Load Toast Notification text
-$AttributionText = "stealthpuppy Service Desk"
-$HeaderText = "Duplicate shortcuts found"
-$TitleText = "Duplicate shortcuts have been removed from your desktop"
-$BodyText1 = "These shortcuts were removed:"
-
-foreach ($Shortcut in $Shortcuts) {
-    $BodyText2 += "$($Shortcut.Name)`n"
-}
-$BodyText2 = $BodyText2.TrimEnd("`n")
-
 # Check for required entries in registry for when using Powershell as application for the toast
 # Register the AppID in the registry for use with the Action Center, if required
-$RegPath = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
-$App = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+$RegPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings"
+$App = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
 
 # Creating registry entries if they don't exist
 if (-not(Test-Path -Path "$RegPath\$App")) {
@@ -133,6 +122,23 @@ if (-not(Test-Path -Path "$RegPath\$App")) {
 # Make sure the app used with the action center is enabled
 if ((Get-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -ErrorAction SilentlyContinue).ShowInActionCenter -ne '1') {
     New-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD' -Force > $Null
+}
+
+#Defining the Toast notification settings
+#ToastNotification Settings
+$Scenario = "reminder" # <!-- Possible values are: reminder | short | long -->
+
+# Load Toast Notification text
+$AttributionText = "stealthpuppy Service Desk"
+$HeaderText = "Duplicate shortcuts removed"
+$TitleText = "Duplicate shortcuts have been removed from your desktop"
+$BodyText1 = "To reduce clutter, these duplicate shortcuts have been removed:"
+
+if ($null -ne $Shortcuts) {
+    foreach ($Shortcut in $Shortcuts) {
+        $BodyText2 += "$($Shortcut.Name)`n"
+    }
+    $BodyText2 = $BodyText2.TrimEnd("`n")
 }
 
 # Formatting the toast notification XML
@@ -164,8 +170,8 @@ if ((Get-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -ErrorAct
     </actions>
 </toast>
 "@
+#endregion
 
 #Send the notification
-Show-ToastNotification
+Show-ToastNotification -Toast $Toast
 exit 0
-#endregion

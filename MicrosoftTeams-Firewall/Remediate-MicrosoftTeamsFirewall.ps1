@@ -27,7 +27,7 @@ function Get-LoggedInUserProfile {
 }
 
 function Set-MicrosoftTeamsFirewallRule {
-    [CmdletBinding(SupportsShouldProcess=$false)]
+    [CmdletBinding(SupportsShouldProcess = $false)]
     param (
         [Parameter(Mandatory = $True)]
         [System.String] $Path
@@ -42,7 +42,7 @@ function Set-MicrosoftTeamsFirewallRule {
                 $params = @{
                     DisplayName = $Rule
                     Direction   = "Inbound"
-                    Profile      = "Any" #"Domain", "Public", "Private"
+                    Profile     = "Any" #"Domain", "Public", "Private"
                     Program     = $TeamsPath
                     Action      = "Allow"
                     Protocol    = "Any"
@@ -65,13 +65,15 @@ try {
     $Profiles = Get-LoggedInUserProfile
     foreach ($Item in $Profiles) {
         Set-MicrosoftTeamsFirewallRule -Path $Item
+        $FirewallSet = $true
     }
 }
 catch [Exception] {
     Write-Output -InputObject $_.Exception.Message
     exit 1
 }
-finally {
+
+if ($FirewallSet) {
     Write-Output -InputObject "Firewall rules created for Microsoft Teams."
     exit 0
 }
