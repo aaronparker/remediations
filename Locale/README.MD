@@ -9,6 +9,4 @@ Proactive remediation scripts:
 * `Detect-SystemLocale.ps1` - detect whether the system locale and regional settings are set to the desired values
 * `Resolve-SystemLocale.ps1` - resolves the locale and regional settings to the desired values
 
-Use the following script as a PowerShell script in Intune where the tenant is not licensed for Proactive Remediations
-
-* `Set-CurrentUserLocale.ps1`
+Also see installing language packs and setting system locale with [Windows Customised Defaults](https://stealthpuppy.com/image-customise/).

@@ -13,24 +13,3 @@ Run with the following settings:
 
 * `Run script in 64-bit PowerShell` - Yes
 * `Run this script using the logged-on credentials` - No
-
-### Detect and remove duplicate shortcuts
-
-* `Detect-DuplicateShortcuts.ps1` - detect duplicate Microsoft Edge and Teams shortcuts
-* `Remediate-DuplicateShortcuts.ps1` - remove duplicate Microsoft Edge and Teams shortcuts
-
-Run with the following settings:
-
-* `Run script in 64-bit PowerShell` - Yes
-* `Run this script using the logged-on credentials` - Yes
-
-When shortcuts are removed a notification will be shown to the user:
-
-![Removed shortcuts notification](/Shortcut/img/removedshortcutsnotification.png)
-
-## PowerShell scripts
-
-Use the following script as a PowerShell script in Intune where the tenant is not licensed for Proactive Remediations
-
-* `Remove-PublicShortcuts.ps1`
-* `New-Shortcut.ps1`
