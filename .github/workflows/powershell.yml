@@ -12,8 +12,12 @@ name: PSScriptAnalyzer
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "**.ps1"
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "**.ps1"
   schedule:
     - cron: '27 0 * * 2'
   workflow_dispatch:

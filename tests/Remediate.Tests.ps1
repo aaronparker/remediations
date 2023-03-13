@@ -8,7 +8,6 @@
 param ()
 
 BeforeDiscovery {
-    # TestCases are splatted to the script so we need hashtables
     $Scripts = Get-ChildItem -Path "$env:GITHUB_WORKSPACE" -Recurse -Include "Remediate*.ps1" -Exclude "*.Tests.ps1*"
 }
 
