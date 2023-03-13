@@ -36,25 +36,25 @@ $Settings = @"
         "type": "Dword"
     }
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\\cServices",
         "name": "bBoxConnectorEnabled",
         "value": 1,
         "type": "Dword"
     },
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\\cServices",
         "name": "bBoxConnectorEnabled",
         "value": 1,
         "type": "Dword"
     },
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\\cServices",
         "name": "bDropboxConnectorEnabled",
         "value": 1,
         "type": "Dword"
     },
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\\cServices",
         "name": "bDropboxConnectorEnabled",
         "value": 1,
         "type": "Dword"
@@ -66,19 +66,19 @@ $Settings = @"
         "type": "Dword"
     },
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\\cServices",
         "name": "bOneDriveConnectorEnabled",
         "value": 0,
         "type": "Dword"
     },
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\\cServices",
         "name": "bGoogleDriveConnectorEnabled",
         "value": 1,
         "type": "Dword"
     },
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Acrobat\\DC\\FeatureLockDown\\cServices",
         "name": "bGoogleDriveConnectorEnabled",
         "value": 1,
         "type": "Dword"
