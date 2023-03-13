@@ -27,7 +27,7 @@ function Get-LoggedInUserProfile {
 }
 
 function Set-MicrosoftTeamsFirewallRule {
-    [CmdletBinding(SupportsShouldProcess = $false)]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(Mandatory = $True)]
         [System.String] $Path
@@ -38,16 +38,18 @@ function Set-MicrosoftTeamsFirewallRule {
         }
         else {
             try {
-                $Rule = "Microsoft Teams: $TeamsPath"
-                $params = @{
-                    DisplayName = $Rule
-                    Direction   = "Inbound"
-                    Profile     = "Any" #"Domain", "Public", "Private"
-                    Program     = $TeamsPath
-                    Action      = "Allow"
-                    Protocol    = "Any"
+                if ($PSCmdlet.ShouldProcess($TeamsPath, "New-NetFirewallRule")) {
+                    $Rule = "Microsoft Teams: $TeamsPath"
+                    $params = @{
+                        DisplayName = $Rule
+                        Direction   = "Inbound"
+                        Profile     = "Any" #"Domain", "Public", "Private"
+                        Program     = $TeamsPath
+                        Action      = "Allow"
+                        Protocol    = "Any"
+                    }
+                    New-NetFirewallRule @params
                 }
-                New-NetFirewallRule @params
             }
             catch {
                 throw $_.Exception.Message
