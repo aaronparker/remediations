@@ -60,7 +60,7 @@ $Settings = @"
         "type": "Dword"
     },
     {
-        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\cServices",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\\cServices",
         "name": "bOneDriveConnectorEnabled",
         "value": 0,
         "type": "Dword"
