@@ -34,7 +34,7 @@ $Settings = @"
         "name": "bAcroSuppressUpsell",
         "value": 1,
         "type": "Dword"
-    }
+    },
     {
         "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown\\cServices",
         "name": "bBoxConnectorEnabled",
