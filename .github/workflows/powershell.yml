@@ -10,17 +10,19 @@
 name: PSScriptAnalyzer
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
     paths:
       - "**.ps1"
+      - "!tests/**.ps1"
   pull_request:
     branches: [ "main" ]
     paths:
       - "**.ps1"
+      - "!tests/**.ps1"
   schedule:
     - cron: '27 0 * * 2'
-  workflow_dispatch:
 
 permissions:
   contents: read

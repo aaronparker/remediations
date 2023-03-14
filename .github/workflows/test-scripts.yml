@@ -9,6 +9,12 @@ on:
     branches: [ "main" ]
     paths:
       - "**.ps1"
+      - "!tests/**.ps1"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "**.ps1"
+      - "!tests/**.ps1"
 
 jobs:
   pester:
@@ -28,7 +34,7 @@ jobs:
           $Config.Run.Path = "$env:GITHUB_WORKSPACE\tests"
           $Config.Run.PassThru = $true
           $Config.CodeCoverage.Enabled = $true
-          $Config.CodeCoverage.Path = "$env:GITHUB_WORKSPACE\scripts"
+          $Config.CodeCoverage.Path = "$env:GITHUB_WORKSPACE"
           $Config.CodeCoverage.OutputFormat = "JaCoCo"
           $Config.CodeCoverage.OutputPath = "$env:GITHUB_WORKSPACE\CodeCoverage.xml"
           $Config.Output.Verbosity = "Detailed"
@@ -85,6 +91,6 @@ jobs:
         id: codecov
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          #token: ${{ secrets.CODECOV_TOKEN }}
           files: "codecov-results/**/*.xml"
           verbose: true
