@@ -28,13 +28,13 @@ jobs:
           $Config.Run.Path = "$env:GITHUB_WORKSPACE\tests"
           $Config.Run.PassThru = $true
           $Config.CodeCoverage.Enabled = $true
-          $Config.CodeCoverage.Path = "$env:GITHUB_WORKSPACE"
+          $Config.CodeCoverage.Path = "$env:GITHUB_WORKSPACE\scripts"
           $Config.CodeCoverage.OutputFormat = "JaCoCo"
           $Config.CodeCoverage.OutputPath = "$env:GITHUB_WORKSPACE\CodeCoverage.xml"
           $Config.Output.Verbosity = "Detailed"
           $Config.TestResult.Enabled = $true
           $Config.TestResult.OutputFormat = "NUnitXml"
-          $Config.TestResult.OutputPath = "$env:GITHUB_WORKSPACE\tests\TestResults.xml"
+          $Config.TestResult.OutputPath = "$env:GITHUB_WORKSPACE\TestResults.xml"
           Invoke-Pester -Configuration $Config
 
       # Upload test results
@@ -43,7 +43,7 @@ jobs:
         if: always()
         with:
           name: test-results
-          path: "${{ github.workspace }}\\tests\\TestResults.xml"
+          path: "${{ github.workspace }}\\TestResults.xml"
 
       - name: Upload code coverage results
         uses: actions/upload-artifact@v3
@@ -59,7 +59,6 @@ jobs:
     if: always()
     permissions:
       checks: write
-
       # only needed unless run with comment_mode: off
       pull-requests: write
 
