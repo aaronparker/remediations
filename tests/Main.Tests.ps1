@@ -8,7 +8,7 @@ param ()
 
 BeforeDiscovery {
     # TestCases are splatted to the script so we need hashtables
-    $Scripts = Get-ChildItem -Path "$env:GITHUB_WORKSPACE\scripts" -Recurse -Include ".*.ps1"
+    $Scripts = Get-ChildItem -Path "$env:GITHUB_WORKSPACE" -Recurse -Include ".*.ps1"
     $TestCases = $Scripts | ForEach-Object { @{file = $_ } }
 }
 
