@@ -15,12 +15,16 @@ on:
     branches: [ "main" ]
     paths:
       - "**.ps1"
-      - "!tests/**.ps1"
+      - "!tests/*"
+      - "!.github/*"
+      - "!.vscode/*"
   pull_request:
     branches: [ "main" ]
     paths:
       - "**.ps1"
-      - "!tests/**.ps1"
+      - "!tests/*"
+      - "!.github/*"
+      - "!.vscode/*"
   schedule:
     - cron: '27 0 * * 2'
 
