@@ -19,6 +19,7 @@ foreach ($module in "Pester") {
         $params = @{
             Name               = $module
             SkipPublisherCheck = $true
+            Force              = $true
             ErrorAction        = "Stop"
         }
         Install-Module @params
