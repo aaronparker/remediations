@@ -34,11 +34,14 @@ jobs:
           .\tests\Install-Pester.ps1
           Import-Module -Name "Pester" -Force -ErrorAction "Stop"
 
-          $Config = [PesterConfiguration]::Default
+          # Get script paths as an array, excluding specific directories
+          $Paths = Get-ChildItem -Path "$env:GITHUB_WORKSPACE" -Directory -Exclude "tests" | Select-Object -ExpandProperty "FullName"
+
+          $Config = New-PesterConfiguration
           $Config.Run.Path = "$env:GITHUB_WORKSPACE\tests"
           $Config.Run.PassThru = $true
           $Config.CodeCoverage.Enabled = $true
-          $Config.CodeCoverage.Path = "$env:GITHUB_WORKSPACE"
+          $Config.CodeCoverage.Path = $Paths
           $Config.CodeCoverage.OutputFormat = "JaCoCo"
           $Config.CodeCoverage.OutputPath = "$env:GITHUB_WORKSPACE\CodeCoverage.xml"
           $Config.Output.Verbosity = "Detailed"
@@ -91,10 +94,16 @@ jobs:
           name: codecov-results
           path: codecov-results
 
-      - name: Upload to Codecov
-        id: codecov
-        uses: codecov/codecov-action@v3
-        with:
-          #token: ${{ secrets.CODECOV_TOKEN }}
-          files: "codecov-results/**/*.xml"
-          verbose: true
+      - name: Upload coverage reports to Codecov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN} -f ./codecov-results/CodeCoverage.xml
+
+      # - name: Upload to Codecov
+      #   id: codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     #token: ${{ secrets.CODECOV_TOKEN }}
+      #     files: "codecov-results/**/*.xml"
+      #     verbose: true
