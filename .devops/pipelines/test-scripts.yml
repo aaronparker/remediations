@@ -11,8 +11,8 @@ trigger:
           - "!.github/*"
           - "!.vscode/*"
 
-pool: 'Azure Virtual Desktop'
-#  vmImage: windows-latest
+pool:
+  vmImage: windows-latest
 
 steps:
 - powershell: |
