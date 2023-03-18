@@ -40,43 +40,6 @@ function Get-KnownFolderPath {
     Write-Output -InputObject $folder
 }
 
-function New-Shortcut {
-    [CmdletBinding(SupportsShouldProcess = $True)]
-    param (
-        [ValidateNotNullOrEmpty]
-        [System.String] $Path,
-
-        [ValidateNotNullOrEmpty]
-        [System.String] $Target,
-
-        [System.String] $Arguments,
-        [System.String] $WorkingDirectory,
-        [System.String] $WindowStyle = 1,
-        [System.String] $Hotkey,
-        [System.String] $Icon,
-        [System.String] $Description
-    )
-    try {
-        if ($PSCmdlet.ShouldProcess($Path, ("Creating shortcut '{0}'" -f $Path))) {
-            Write-Verbose -Message "Creating shortcut $($Path)."
-            $shell = New-Object -ComObject ("WScript.Shell")
-            $shortCut = $shell.CreateShortcut($Path)
-            $shortCut.TargetPath = $Target
-            $shortCut.Arguments = $Arguments
-            $shortCut.WorkingDirectory = $WorkingDirectory
-            $shortCut.WindowStyle = $WindowStyle
-            $shortCut.Hotkey = $Hotkey
-            $shortCut.IconLocation = $Icon
-            $shortCut.Description = $Description
-            $shortCut.Save()
-        }
-        Write-Output -InputObject $Path
-    }
-    catch {
-        throw $_
-    }
-}
-
 # Shortcut locations array
 $Paths = @($(Get-KnownFolderPath -KnownFolder "Desktop"), "$(Get-KnownFolderPath -KnownFolder "StartMenu")\Programs")
 

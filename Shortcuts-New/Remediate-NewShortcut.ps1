@@ -43,12 +43,8 @@ function Get-KnownFolderPath {
 function New-Shortcut {
     [CmdletBinding(SupportsShouldProcess = $True)]
     param (
-        [ValidateNotNullOrEmpty]
         [System.String] $Path,
-
-        [ValidateNotNullOrEmpty]
         [System.String] $Target,
-
         [System.String] $Arguments,
         [System.String] $WorkingDirectory,
         [System.String] $WindowStyle = 1,
