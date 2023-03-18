@@ -99,11 +99,3 @@ jobs:
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov -t ${CODECOV_TOKEN} -f ./codecov-results/CodeCoverage.xml
-
-      # - name: Upload to Codecov
-      #   id: codecov
-      #   uses: codecov/codecov-action@v3
-      #   with:
-      #     #token: ${{ secrets.CODECOV_TOKEN }}
-      #     files: "codecov-results/**/*.xml"
-      #     verbose: true
