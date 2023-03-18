@@ -11,7 +11,7 @@
 function Get-LoggedInUserProfile {
     $ComputerSystem = Get-CimInstance -Class "Win32_ComputerSystem"
     if ([System.String]::IsNullOrEmpty($ComputerSystem.UserName)) {
-        throw "Cannot find UserName in Win32_ComputerSystem."
+        Write-Output -InputObject $null
     }
     else {
         try {
