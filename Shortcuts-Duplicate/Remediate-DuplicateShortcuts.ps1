@@ -115,13 +115,13 @@ $App = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell
 
 # Creating registry entries if they don't exist
 if (-not(Test-Path -Path "$RegPath\$App")) {
-    New-Item -Path "$RegPath\$App" -Force > $Null
-    New-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD' > $Null
+    New-Item -Path "$RegPath\$App" -Force > $null
+    New-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD' > $null
 }
 
 # Make sure the app used with the action center is enabled
 if ((Get-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -ErrorAction SilentlyContinue).ShowInActionCenter -ne '1') {
-    New-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD' -Force > $Null
+    New-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD' -Force > $null
 }
 
 #Defining the Toast notification settings

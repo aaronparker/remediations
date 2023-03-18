@@ -86,10 +86,10 @@ foreach ($Key in ($Keys | ConvertFrom-Json)) {
         $Value = Get-ItemProperty -Path $Key.Key -Name $Key.Value -ErrorAction "SilentlyContinue"
     }
     catch {
-        $Value = $Null
+        $Value = $null
     }
 
-    if ($Null -ne $Value) {
+    if ($null -ne $Value) {
         if ($Value.($Key.Value) -eq $Key.Data) {
             $Output += "`nValue match: $($Key.Key)\$($Key.Value)"
             $Result = 0

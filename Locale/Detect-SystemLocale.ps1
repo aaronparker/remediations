@@ -48,25 +48,25 @@ try {
     Import-Module -Name "International"
 
     # System locale
-    if ($Null -eq (Get-WinSystemLocale | Where-Object { $_.Name -eq $Locale })) {
+    if ($null -eq (Get-WinSystemLocale | Where-Object { $_.Name -eq $Locale })) {
         Write-Host "System locale does not match $Locale."
         Exit 1
     }
 
     # Language list
-    if ($Null -eq (Get-WinUserLanguageList | Where-Object { $_.LanguageTag -eq $Locale })) {
+    if ($null -eq (Get-WinUserLanguageList | Where-Object { $_.LanguageTag -eq $Locale })) {
         Write-Host "Language list does not match $Locale."
         Exit 1
     }
 
     # Home location
-    if ($Null -eq (Get-WinHomeLocation | Where-Object { $_.GeoId -eq $GeoId })) {
+    if ($null -eq (Get-WinHomeLocation | Where-Object { $_.GeoId -eq $GeoId })) {
         Write-Host "Home location does not match $Locale."
         Exit 1
     }
 
     # Time zone
-    if ($Null -eq (Get-TimeZone | Where-Object { $_.Id -eq $Timezone })) {
+    if ($null -eq (Get-TimeZone | Where-Object { $_.Id -eq $Timezone })) {
         Write-Host "Time zone does not match $Timezone."
         Exit 1
     }

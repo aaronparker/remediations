@@ -46,7 +46,7 @@ foreach ($Setting in $Settings) {
             Force       = $True
             ErrorAction = "SilentlyContinue"
         }
-        Set-ItemProperty @params > $Null
+        Set-ItemProperty @params > $null
         $Result = 0
     }
     catch {

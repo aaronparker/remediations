@@ -51,7 +51,7 @@ catch {
 }
 
 try {
-    If ($Shortcuts.Count -ge 1) { $Shortcuts | Remove-Item -Force -ErrorAction "SilentlyContinue" }
+    if ($Shortcuts.Count -ge 1) { $Shortcuts | Remove-Item -Force -ErrorAction "SilentlyContinue" }
 }
 catch {
     Write-Host "Failed when deleting shortcuts at: $PublicDesktop. $($_.Exception.Message)"

@@ -13,7 +13,7 @@ function Get-EnrollmentsRegistryKey {
         }
     }
     catch {
-        $MatchingKey = $Null
+        $MatchingKey = $null
         throw "Failed to return key."
     }
     Write-Output -InputObject $MatchingKey
