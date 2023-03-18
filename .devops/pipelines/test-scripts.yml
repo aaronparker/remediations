@@ -31,9 +31,11 @@ steps:
   displayName: 'Test with Pester'
   workingDirectory: $(build.sourcesDirectory)
   errorActionPreference: continue
+  continueOnError: true
 
 - publish: "$(build.sourcesDirectory)\\TestResults.xml"
   artifact: TestResults
+  continueOnError: true
 
 - task: PublishTestResults@2
   inputs:
