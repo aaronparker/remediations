@@ -56,7 +56,7 @@ try {
     $Versions = $VersionsJson | ConvertFrom-Json
     $Configuration = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Office\ClickToRun\Configuration" -ErrorAction "SilentlyContinue"
     $Channel = $Versions | Where-Object { $_.Guid -eq $Configuration.AudienceId }
-    
+
     # Compare version and output result
     if ([System.String]::IsNullOrEmpty($Configuration.VersionToReport)) {
         Write-Output -InputObject "Microsoft 365 Apps not detected"
