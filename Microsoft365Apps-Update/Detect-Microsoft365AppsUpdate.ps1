@@ -4,6 +4,8 @@
 #>
 
 # List the minimum version for each update channel
+# Use Evergreen to return the latest update versions https://stealthpuppy.com/evergreen
+#  Get-EvergreenApp -Name Microsoft365Apps
 $VersionsJson = @"
 [
     {
@@ -65,6 +67,7 @@ try {
             exit 1
         }
         else {
+            Write-Output -InputObject "No update required"
             exit 0
         }
     }
