@@ -82,6 +82,18 @@ $Settings = @"
         "name": "bGoogleDriveConnectorEnabled",
         "value": 1,
         "type": "Dword"
+    },
+    {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown",
+        "name": "bIsSCReducedModeEnforcedEx",
+        "value": 1,
+        "type": "Dword"
+    },
+    {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Adobe\\Adobe Acrobat\\DC\\FeatureLockDown\\cIPM",
+        "name": "bDontShowMsgWhenViewingDoc",
+        "value": 0,
+        "type": "Dword"
     }
 ]
 "@ | ConvertFrom-Json
