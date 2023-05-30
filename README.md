@@ -8,5 +8,5 @@ Scripts are automatically tested using Pester on Windows Server via GitHub Actio
 
 | Tests | Results |
 |:--|:--|
-| Result of Pester tests on the proactive remediations | [![Validate proactive remediations](https://github.com/aaronparker/proactive-remediations/actions/workflows/test-scripts.yml/badge.svg)](https://github.com/aaronparker/proactive-remediations/actions/workflows/test-scripts.yml) |
-| Code coverage results | [![codecov](https://codecov.io/gh/aaronparker/proactive-remediations/branch/main/graph/badge.svg?token=8KDFD4IV71)](https://codecov.io/gh/aaronparker/proactive-remediations) |
+| Result of Pester tests on the proactive remediations | [![Validate proactive remediations](https://github.com/aaronparker/remediations/actions/workflows/test-scripts.yml/badge.svg)](https://github.com/aaronparker/remediations/actions/workflows/test-scripts.yml) |
+| Code coverage results | [![codecov](https://codecov.io/gh/aaronparker/remediations/branch/main/graph/badge.svg?token=8KDFD4IV71)](https://codecov.io/gh/aaronparker/remediations) |
