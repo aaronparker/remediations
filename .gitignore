@@ -25,3 +25,6 @@ ehthumbs.db
 Thumbs.db
 *.tmp
 .cache
+
+# Credentials
+auth.json
