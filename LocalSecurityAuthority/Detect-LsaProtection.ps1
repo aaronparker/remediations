@@ -23,8 +23,8 @@ catch {
 }
 
 if ($Property.$Name -eq $Value) {
-    return 0
+    exit 0
 }
 else {
-    return 1
+    exit 1
 }

@@ -35,15 +35,15 @@ function Get-MicrosoftTeamsFirewallRule {
     if (Test-Path -Path $TeamsPath) {
         $Rule = "Microsoft Teams: $TeamsPath"
         if (Get-NetFirewallRule -DisplayName $Rule -ErrorAction "SilentlyContinue") {
-            return 0
+            exit 0
         }
         else {
-            return 1
+            exit 1
         }
     }
     else {
         # Return success if Teams is not installed
-        return 0
+        exit 0
     }
 }
 #endregion Functions
