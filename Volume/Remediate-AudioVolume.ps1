@@ -6,7 +6,7 @@
 [CmdletBinding()]
 param (
     [ValidateRange(0, 1)]
-    [System.Int32] $Volume = 0.3
+    [System.Double] $Volume = 0.3
 )
 
 Add-Type -TypeDefinition @'
