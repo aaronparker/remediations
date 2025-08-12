@@ -25,7 +25,7 @@ jobs:
     name: "Test scripts with Pester"
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Pester tests
         shell: powershell
