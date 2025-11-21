@@ -7,7 +7,9 @@
         Author: Aaron Parker
         Twitter: @stealthpuppy
 #>
-
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWriteHost", "", Justification = "Output required by Proactive Remediations.")]
+param()
 
 try {
     $FilePath = "$Env:AppData\Microsoft\Teams\desktop-config.json"

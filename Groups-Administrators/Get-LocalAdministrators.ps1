@@ -1,3 +1,7 @@
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWriteHost", "", Justification = "Output required by Proactive Remediations.")]
+param()
+
 #use the old net localgroup command to get members of the local Administrators group,
 # then parse the text output, excluding the built-in Administrator user and Domain Admins group
 $LocalAdmins = net localgroup administrators | `
