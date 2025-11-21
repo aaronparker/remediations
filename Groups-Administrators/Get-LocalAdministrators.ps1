@@ -5,7 +5,7 @@ $LocalAdmins = net localgroup administrators | `
     Select-Object -Skip 4
 
 #Convert the text to an array
-$LocalAdmins = $LocalAdmins.Split([Environment]::NewLine) | ? { $_ -ne "" }
+$LocalAdmins = $LocalAdmins.Split([Environment]::NewLine) | Where-Object { $_ -ne "" }
 
 #Example of looping through the array
 foreach ($user in $LocalAdmins) {
