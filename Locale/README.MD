@@ -7,6 +7,6 @@ Ensure that the appropriate Local Experience Pack (LXP) has been deployed from t
 Proactive remediation scripts:
 
 * `Detect-SystemLocale.ps1` - detect whether the system locale and regional settings are set to the desired values
-* `Resolve-SystemLocale.ps1` - resolves the locale and regional settings to the desired values
+* `Remediate-SystemLocale.ps1` - sets the locale and regional settings to the desired values
 
 Also see installing language packs and setting system locale with [Windows Customised Defaults](https://stealthpuppy.com/image-customise/).
